@@ -1,0 +1,64 @@
+classDiagram
+
+class Owner {
+    +String name
+    +List~Pet~ pets
+    +add_pet(pet)
+    +get_pets()
+    +get_all_tasks()
+}
+
+class Pet {
+    +String name
+    +String species
+    +Optional~String~ breed
+    +Optional~int~ age
+    +List~Task~ tasks
+    +add_task(task)
+    +get_tasks()
+    +get_pending_tasks()
+}
+
+class Task {
+    +String name
+    +String category
+    +int duration
+    +String priority
+    +Optional~String~ preferred_time
+    +bool recurring
+    +Optional~String~ recurrence_interval
+    +Optional~date~ due_date
+    +bool completed
+    +mark_complete()
+    +get_details()
+}
+
+class Scheduler {
+    +Optional~Owner~ owner
+    +get_all_tasks()
+    +get_tasks(pet, recurring_only, include_completed)
+    +organize_tasks(pet, include_completed)
+    +sort_by_time(tasks)
+    +filter_tasks(tasks, pet_name, include_completed)
+    +complete_task(task)
+    +detect_conflicts()
+}
+
+class CarePlan {
+    +Optional~Owner~ owner
+    +Optional~Pet~ pet
+    +int available_time
+    +List~Task~ scheduled_tasks
+    +_priority_rank(priority)
+    +generate_plan()
+    +sort_tasks()
+    +get_plan()
+}
+
+Owner "1" o-- "0..*" Pet : owns
+Pet "1" *-- "0..*" Task : contains
+Scheduler --> Owner : manages
+Scheduler --> Pet : filters and sorts tasks for
+Scheduler --> Task : organizes, completes, and checks conflicts
+CarePlan --> Pet : plans for
+CarePlan --> Task : schedules
