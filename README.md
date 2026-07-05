@@ -12,6 +12,30 @@ A busy pet owner needs help staying consistent with pet care. They want an assis
 
 Your job is to design the system first (UML), then implement the logic in Python, then connect it to the Streamlit UI.
 
+## System Design 
+3 Core Actions User Should be able to Perform 
+    1. Add basic owner and pet info 
+    2. Adding or editing pet care tasks
+    3. Generate and view daily care plan based on available time and task priority. 
+
+
+## LISTING THE BUILDING BLOCKS 
+Owner
+- attributes: name, pets
+- methods: add_pet(), get_pets()
+
+Pet
+- attributes: name, species, breed, age, tasks
+- methods: add_task(), get_tasks()
+
+Task
+- attributes: name, category, duration, priority, preferred_time, recurring
+- methods: mark_complete(), get_details()
+
+CarePlan
+- attributes: pet, available_time, scheduled_tasks
+- methods: generate_plan(), sort_tasks(), get_plan()
+
 ## What you will build
 
 Your final app should:
